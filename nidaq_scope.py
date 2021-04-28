@@ -13,7 +13,6 @@ import sip
 sip.setapi('QString',2)
 sip.setapi('QVariant',2)
 
-from nptdms import TdmsFile
 from pyqtgraph.Qt import QtCore, QtGui
 import numpy as np
 import nidaqmx
