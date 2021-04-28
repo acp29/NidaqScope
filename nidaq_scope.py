@@ -372,7 +372,10 @@ def scope(save=False,
         pPulse.setLabel('bottom', "Time (s)")
         pulseX = []
         pulseY1 = []
+        #pulseY1 = []
         curvePulse1 = pPulse.plot(np.array(pulseX),np.array(pulseY1)*scale/gain,symbol='o',symbolBrush='y',symbolPen='y',pen='y')
+        #if non_local_var['nChannels'] == 2: 
+        #    curvePulse2 = pPulse.plot(np.array(pulseX),np.array(pulseY1)*scale/gain,symbol='o',symbolBrush='c',symbolPen='c',pen='c')
     
 
 
@@ -380,6 +383,7 @@ def scope(save=False,
 	    pg.QtCore.QTimer.singleShot((prepulse*1000)+200, update_pulse)
 
     def update_pulse():
+	# Currently only works for 1 channel and for a negative test pulse
         pulseinfo = []
         pulseX.append(non_local_var['x'][-1])
         pulseinfo = non_local_var['yscan1'].tolist()
