@@ -1,0 +1,25 @@
+True
+20000
+2000
+10000
+/Dev1/ai0
+None
+C:\Users\Public\Documents\nidaq_scope_data
+DIFFERENTIAL
+10.0
+False
+2e-09
+100.0
+
+C:\Users\Public\Public Program Files (x86)\acq4
+
+
+
+MultiClamp700
+1.0
+-0.002
+0.01
+8.99
+-0.045
+20
+True
