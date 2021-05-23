@@ -489,7 +489,7 @@ def mc700scope(save=False,
         if unit=='A':
             mcchan.setMode('VC')
         elif unit=='V':
-            mcchan.setMode('IC')
+            mcchan.setMode('I=0')
         mcchan.setParams({'PrimarySignalGain':gain})
         mcchan.setParams({'PrimarySignalLPF':Fc})
 
