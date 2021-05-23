@@ -443,7 +443,9 @@ def scope(save=False,
             np.savetxt("./%s_baseline.txt" % (fname),np.transpose(np.matrix([binX,np.array(binY1)*scale/gain,np.array(binY2)*scale/gain])))
         if pulse is True:
             np.savetxt("./%s_access.txt" % (fname),np.transpose(np.matrix([pulseX,pulseY1])))
+	# Write scale factor for acquired raw data to file and any other user notes
         f = open("./%s_notes.txt" % (fname),'w+')
+	f.write("Scale factor to generate data from tdms file: %s\n" % (scale/gain))
         f.write(notes)
         f.close()
 	   
@@ -489,7 +491,7 @@ def mc700scope(save=False,
         if unit=='A':
             mcchan.setMode('VC')
         elif unit=='V':
-            mcchan.setMode('I=0')
+            mcchan.setMode('I=0') # Currently only current clamp with I=0 for the time being
         mcchan.setParams({'PrimarySignalGain':gain})
         mcchan.setParams({'PrimarySignalLPF':Fc})
 
