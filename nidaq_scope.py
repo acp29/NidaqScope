@@ -393,7 +393,7 @@ def scope(save=False,
         pulse_baseline = pulseinfo[0:int(prepulse*1000)-200]
         median = np.median(pulse_baseline)*scale/gain
         diff = (pulse_max*scale/gain)-median
-        res=abs(0.01/diff)
+        res=abs(pulse_amp/diff)
 
         pulseY1.append(res)
         curvePulse1.setData(np.array(pulseX),np.array(pulseY1))
