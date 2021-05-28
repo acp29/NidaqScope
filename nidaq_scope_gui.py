@@ -231,11 +231,21 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             if settings['amplifier'] == 'Please Select Your Amplifier':
 			    settings['output'] = []
             elif settings['amplifier'] == "MultiClamp700":
+                rec_settings = ""
+                rec_settings += "Amplifier: %s; " % (settings['amplifier'])
+                rec_settings += "Amplifier scale: %s; " % (settings['scale'])
+                rec_settings += "Amplifier gain: %s; " % (settings['gain'])
+                rec_settings += "Amplifier low-pass filter cutoff: %s Hz; " % (settings['fc'])
+                rec_settings += "Sampling rate: %s Hz; " % (settings['rate'])
+                rec_settings += "Test pulse? %s; " % (settings['pulse'])
+                rec_settings += "Test pulse interval: %s s; " % (settings['win_size']/1000)
+                rec_settings += "Amplitude of test pulse: %s V; " % (settings['pulse_amp'])    
+                rec_settings += "Duration of test pulse: %s s; " % (settings['pulse_length'])
                 scope = "nidaq_scope.mc700scope("
-                settings['output'] = scope + str(save) + ", " + str(rate) + ", " + str(fc) + ", " + str(win_size) + ", " + str(ai_channel_format) + ", '" + str(save_dir)  + "', '" + str(config)+ "', " + str(limits_format) + ", '" + str(unit)+ "', " + str(scale)+ ", " + str(gain) + ", '" + str(notes) + "', " + str(settings['prepulse']) + ", " + str(settings['pulse_amp'])  + ", " + str(settings['pulse_length']) + ", " + str(settings['postpulse']) + ", " + str(settings['holding'])  + ", " + str(settings['commander_scale']) + ", " + str(pulse) + ")"
+                settings['output'] = scope + str(save) + ", " + str(rate) + ", " + str(fc) + ", " + str(win_size) + ", " + str(ai_channel_format) + ", '" + str(save_dir)  + "', '" + str(config)+ "', " + str(limits_format) + ", '" + str(unit)+ "', " + str(scale)+ ", " + str(gain) + ", '" + str(rec_settings + "Notes: " + notes) + "', " + str(settings['prepulse']) + ", " + str(settings['pulse_amp'])  + ", " + str(settings['pulse_length']) + ", " + str(settings['postpulse']) + ", " + str(settings['holding'])  + ", " + str(settings['commander_scale']) + ", " + str(pulse) + ")"
             else:
                 scope = "nidaq_scope.scope("
-                settings['output'] = scope + str(save) + ", " + str(rate) + ", " + str(win_size) + ", " + str(ai_channel_format) + ", '" + str(save_dir)  + "', '" + str(config) + "', " + str(limits_format)  + ", '" + str(unit)+ "', " + str(scale)+ ", " + str(gain)+ ", '" + str(notes) + "', " + str(settings['prepulse']) + ", " + str(settings['pulse_amp']) + ", " + str(settings['pulse_length']) + ", " + str(settings['postpulse']) + ", " + str(settings['holding']) + ", " + str(settings['commander_scale']) + ", "  +  str(pulse) + ")"
+                settings['output'] = scope + str(save) + ", " + str(rate) + ", " + str(win_size) + ", " + str(ai_channel_format) + ", '" + str(save_dir)  + "', '" + str(config) + "', " + str(limits_format)  + ", '" + str(unit)+ "', " + str(scale)+ ", " + str(gain)+ ", '" + str(rec_settings + "Notes: " + notes) + "', " + str(settings['prepulse']) + ", " + str(settings['pulse_amp']) + ", " + str(settings['pulse_length']) + ", " + str(settings['postpulse']) + ", " + str(settings['holding']) + ", " + str(settings['commander_scale']) + ", "  +  str(pulse) + ")"
 
 
         #########################################################

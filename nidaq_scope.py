@@ -372,10 +372,7 @@ def scope(save=False,
         pPulse.setLabel('bottom', "Time (s)")
         pulseX = []
         pulseY1 = []
-        #pulseY1 = []
         curvePulse1 = pPulse.plot(np.array(pulseX),np.array(pulseY1)*scale/gain,symbol='o',symbolBrush='y',symbolPen='y',pen='y')
-        #if non_local_var['nChannels'] == 2: 
-        #    curvePulse2 = pPulse.plot(np.array(pulseX),np.array(pulseY1)*scale/gain,symbol='o',symbolBrush='c',symbolPen='c',pen='c')
     
 
 
@@ -383,7 +380,6 @@ def scope(save=False,
 	    pg.QtCore.QTimer.singleShot((prepulse*1000)+200, update_pulse)
 
     def update_pulse():
-	# Currently only works for 1 channel and for a negative test pulse
         pulseinfo = []
         pulseX.append(non_local_var['x'][-1])
         pulseinfo = non_local_var['yscan1'].tolist()
@@ -393,7 +389,7 @@ def scope(save=False,
         pulse_baseline = pulseinfo[0:int(prepulse*1000)-200]
         median = np.median(pulse_baseline)*scale/gain
         diff = (pulse_max*scale/gain)-median
-        res=abs(pulse_amp/diff)
+        res=abs(0.01/diff)
 
         pulseY1.append(res)
         curvePulse1.setData(np.array(pulseX),np.array(pulseY1))
@@ -443,10 +439,10 @@ def scope(save=False,
             np.savetxt("./%s_baseline.txt" % (fname),np.transpose(np.matrix([binX,np.array(binY1)*scale/gain,np.array(binY2)*scale/gain])))
         if pulse is True:
             np.savetxt("./%s_access.txt" % (fname),np.transpose(np.matrix([pulseX,pulseY1])))
-	# Write scale factor for acquired raw data to file and any other user notes
+        # Write scale factor for acquired raw data to file and any other user notes
         f = open("./%s_notes.txt" % (fname),'w+')
-	f.write("Scale factor to generate data from tdms file: %s\n" % (scale/gain))
-        f.write(notes)
+        f.write("Scale factor to generate data from tdms file: %s\n" % (scale/gain))
+        f.write(notes.replace("; ","\n"))
         f.close()
 	   
 def mc700scope(save=False,
@@ -491,7 +487,7 @@ def mc700scope(save=False,
         if unit=='A':
             mcchan.setMode('VC')
         elif unit=='V':
-            mcchan.setMode('I=0') # Currently only current clamp with I=0 for the time being
+            mcchan.setMode('I=0')
         mcchan.setParams({'PrimarySignalGain':gain})
         mcchan.setParams({'PrimarySignalLPF':Fc})
 
